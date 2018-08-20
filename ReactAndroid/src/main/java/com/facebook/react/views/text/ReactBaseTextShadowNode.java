@@ -91,7 +91,8 @@ public abstract class ReactBaseTextShadowNode extends LayoutShadowNode {
       ReactShadowNode child = textShadowNode.getChildAt(i);
 
       if (child instanceof ReactRawTextShadowNode) {
-        sb.append(Html.fromHtml(((ReactRawTextShadowNode) child).getText()));
+        String formattedText = ((ReactRawTextShadowNode) child).getText().replaceAll(" ", "&nbsp;").replaceAll("\n", "<br />");
+        sb.append(Html.fromHtml(formattedText));
       } else if (child instanceof ReactBaseTextShadowNode) {
         buildSpannedFromShadowNode((ReactBaseTextShadowNode) child, sb, ops);
       } else if (child instanceof ReactTextInlineImageShadowNode) {
